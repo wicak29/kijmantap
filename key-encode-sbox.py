@@ -1,5 +1,23 @@
 __author__ = 'Indra Gunawan'
 __author__ = 'Dwi Pratama'
+__author__ = 'Adi Wicaksana'
+
+def str_ke_bitlist(s):
+    ords = (ord(c) for c in s)
+    shifts = (7, 6, 5, 4, 3, 2, 1, 0)
+    return [(o >> shift) & 1 for o in ords for shift in shifts]
+
+def bitlist_ke_chars(bl):
+    bi = iter(bl)
+    bytes = zip(*(bi,) * 8)
+    shifts = (7, 6, 5, 4, 3, 2, 1, 0)
+    for byte in bytes:
+        yield chr(sum(bit << s for bit, s in zip(byte, shifts)))
+
+
+def bitlist_ke_str(bl):
+    return ''.join(bitlist_ke_chars(bl))
+
 
 key = [0,0,0,1,0,0,1,1, 0,0,1,1,0,1,0,0, 0,1,0,1,0,1,1,1, 0,1,1,1,1,0,0,1, 1,0,0,1,1,0,1,1, 1,0,1,1,1,1,0,0, 1,1,0,1,1,1,1,1, 1,1,1,1,0,0,0,1]
 PC1 = [57,  49,    41,   33,    25,    17,    9]
@@ -308,4 +326,62 @@ right5 = ulangR(K5, left4, right4)
 left6 = right5
 right6 = ulangR(K6, left5, right5)
 
-print right1
+left7 = right6
+right7 = ulangR(K7, left6, right6)
+
+left8 = right7
+right8 = ulangR(K8, left7, right7)
+
+left9 = right8
+right9 = ulangR(K9, left8, right8)
+
+left10 = right9
+right10 = ulangR(K10, left9, right9)
+
+left11 = right10
+right11 = ulangR(K11, left10, right10)
+
+left12 = right11
+right12 = ulangR(K12, left11, right11)
+
+left13 = right12
+right13 = ulangR(K13, left12, right12)
+
+left14 = right13
+right14 = ulangR(K14, left13, right13)
+
+left15 = right14
+right15 = ulangR(K15, left14, right14)
+
+left16 = right15
+right16 = ulangR(K16, left15, right15)
+
+final = left16
+final.extend(right16)
+
+print "L6R6 : ", final
+print len(final)
+
+IPR = [
+    40, 8,  48, 16, 56, 24, 64, 32,
+    39, 7,  47, 15, 55, 23, 63, 31,
+    38, 6,  46, 14, 54, 22, 62, 30,
+    37, 5,  45, 13, 53, 21, 61, 29,
+    36, 4,  44, 12, 52, 20, 60, 28,
+    35, 3,  43, 11, 51, 19, 59, 27,
+    34, 2,  42, 10, 50, 18, 58, 26,
+    33, 1,  41, 9,  49, 17, 57, 25
+]
+
+finalIP = [None]*64
+
+for x in range(0, len(IPR)):
+    a= IPR[x]-1
+    tempf = final[a]
+    #print tempKey
+    finalIP[x] = tempf
+    #print key[a]
+
+print "IP-1 : ", finalIP
+print len(finalIP)
+print bitlist_ke_str(finalIP)

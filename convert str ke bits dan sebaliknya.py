@@ -19,6 +19,7 @@ def bitlist_ke_str(bl):
 
 hasil1 = str_ke_bitlist("Informatika")
 print hasil1
+print len(hasil1)
 
 hasil2 = bitlist_ke_str(hasil1)
 print hasil2
