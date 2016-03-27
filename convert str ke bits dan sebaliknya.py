@@ -12,14 +12,29 @@ def bitlist_ke_chars(bl):
     for byte in bytes:
         yield chr(sum(bit << s for bit, s in zip(byte, shifts)))
 
-
 def bitlist_ke_str(bl):
     return ''.join(bitlist_ke_chars(bl))
 
+key = "0123456789ABCDEF"
+# hexKey = ":".join("{:02x}".format(ord(c)) for c in key)
+# print "hexKey : ", hexKey
+hexKey = ''.join(format(ord(x), 'b') for x in key)
+print "hexKey : ", hexKey
 
-hasil1 = str_ke_bitlist("Informatika")
+print "key : ", str_ke_bitlist(key)
+print len(str_ke_bitlist(key))
+
+hasil1 = str_ke_bitlist(key)
 print hasil1
 print len(hasil1)
 
 hasil2 = bitlist_ke_str(hasil1)
 print hasil2
+
+# #String to hexa decimal
+# my_hexdata = "133457799BBCDFF1"
+# scale = 16 ## equals to hexadecimal
+# num_of_bits = 4
+# result = bin(int(my_hexdata, scale))[2:].zfill(num_of_bits)
+# print result
+# print len(result)

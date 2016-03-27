@@ -2,6 +2,8 @@ __author__ = 'Indra Gunawan'
 __author__ = 'Dwi Pratama'
 __author__ = 'Adi Wicaksana'
 
+from DESwork import des
+
 def str_ke_bitlist(s):
     ords = (ord(c) for c in s)
     shifts = (7, 6, 5, 4, 3, 2, 1, 0)
@@ -18,8 +20,34 @@ def bitlist_ke_chars(bl):
 def bitlist_ke_str(bl):
     return ''.join(bitlist_ke_chars(bl))
 
+#------------------------------------------------------------------------------------------
 
-key = [0,0,0,1,0,0,1,1, 0,0,1,1,0,1,0,0, 0,1,0,1,0,1,1,1, 0,1,1,1,1,0,0,1, 1,0,0,1,1,0,1,1, 1,0,1,1,1,1,0,0, 1,1,0,1,1,1,1,1, 1,1,1,1,0,0,0,1]
+'''
+    Definisi Pesan dan Kunci harus 64 bit / 8 character
+'''
+IV = 'kudalari'
+key = '12345678'
+mess = 'liar'
+
+#key 64 bit
+b_key = str_ke_bitlist(key)
+print  b_key
+print len(b_key)
+
+#Message 32 bit
+b_mess = str_ke_bitlist(mess)
+print b_mess
+print len(b_mess)
+
+#initial value 64 bit
+b_IV = str_ke_bitlist(IV)
+print b_IV
+print len(b_IV)
+
+#------------------------------------------------------------------------------------------
+
+# key = [0,0,0,1,0,0,1,1, 0,0,1,1,0,1,0,0, 0,1,0,1,0,1,1,1, 0,1,1,1,1,0,0,1, 1,0,0,1,1,0,1,1, 1,0,1,1,1,1,0,0, 1,1,0,1,1,1,1,1, 1,1,1,1,0,0,0,1]
+key = b_key
 PC1 = [57,  49,    41,   33,    25,    17,    9]
 PC1.extend( [1,   58,   50,   42,   34,   26,   18] )
 PC1.extend([10,    2,    59,   51,    43,    35,   27])
@@ -145,7 +173,8 @@ K16 = newKey(PC2, C16, D16)
 
 
 
-message = [0,0,0,0, 0,0,0,1, 0,0,1,0, 0,0,1,1, 0,1,0,0, 0,1,0,1, 0,1,1,0, 0,1,1,1, 1,0,0,0, 1,0,0,1, 1,0,1,0, 1,0,1,1, 1,1,0,0, 1,1,0,1, 1,1,1,0, 1,1,1,1]
+# message = [0,0,0,0, 0,0,0,1, 0,0,1,0, 0,0,1,1, 0,1,0,0, 0,1,0,1, 0,1,1,0, 0,1,1,1, 1,0,0,0, 1,0,0,1, 1,0,1,0, 1,0,1,1, 1,1,0,0, 1,1,0,1, 1,1,1,0, 1,1,1,1]
+message = b_IV
 IP = [58,    50,   42,    34,    26,   18,    10,    2]
 IP.extend( [60,    52,   44,    36,    28,   20,    12,    4] )
 IP.extend([62,    54,   46,    38,    30,   22,    14,    6])
@@ -283,7 +312,7 @@ def ulangR(key, left, right):
     #print m
     #print n
     #print v
-    print Btot
+    # print Btot
 
     P = [16,   7,  20,  21]
     P.extend( [29,  12,  28,  17] )
@@ -359,8 +388,8 @@ right16 = ulangR(K16, left15, right15)
 final = left16
 final.extend(right16)
 
-print "L6R6 : ", final
-print len(final)
+# print "L6R6 : ", final
+# print len(final)
 
 IPR = [
     40, 8,  48, 16, 56, 24, 64, 32,
@@ -384,4 +413,55 @@ for x in range(0, len(IPR)):
 
 print "IP-1 : ", finalIP
 print len(finalIP)
-print bitlist_ke_str(finalIP)
+finalEncrypt = bitlist_ke_str(finalIP)
+print finalEncrypt
+
+print "decrypt : ", des('12345678').decrypt(finalEncrypt)
+
+#----------------------------------------------------------------------
+hasil0 = finalEncrypt
+print "encrypt : ", hasil0
+dibagi0 = str_ke_bitlist(hasil0)
+print dibagi0
+
+Sleft0 = dibagi0[:len(dibagi0)/2]
+Sright0 = dibagi0[len(dibagi0)/2:]
+
+print Sleft0
+#print Sright0
+
+m0 = str_ke_bitlist(mess)
+print m0
+c1 = map(lambda x, y: x^y, m0,Sleft0 )
+print c1
+
+x1 = Sright0 + c1
+
+print "x1 :", x1
+
+
+print bitlist_ke_str(c1)
+
+
+# hasil0 = des(key).encrypt(IV)
+# print hasil0
+# dibagi0 = str_ke_bitlist(hasil0)
+# print dibagi0
+#
+# Sleft0 = dibagi0[:len(dibagi0)/2]
+# Sright0 = dibagi0[len(dibagi0)/2:]
+#
+# print Sleft0
+# #print Sright0
+#
+# m0 = str_ke_bitlist(mess)
+# print m0
+# c1 = map(lambda x, y: x^y, m0,Sleft0 )
+# print c1
+#
+# x1 = Sright0 + c1
+#
+# print x1
+#
+#
+# print bitlist_ke_str(c1)
