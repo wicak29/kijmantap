@@ -443,7 +443,7 @@ for index in range(0, len(mess)):
     print "x%d :" % index, x1
     print "--------------------------------------------------------------------"
 
-print "Final CFB Result : ", IV
+print "Final CFB : ", IV
     # print len(x1)
     # print bitlist_ke_str(c1)
 
