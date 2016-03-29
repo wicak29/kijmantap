@@ -156,20 +156,22 @@ IP.extend([61,    53,   45,    37,    29,   21,    13,    5])
 IP.extend([63,    55,   47,    39,    31,   23,    15,    7])
 
 
-hasilIP = [None]*64
 
-for x in range(0, len(IP)):
-    a= IP[x]-1
-    #print a
-    tempmessage = message[a]
-    #print tempKey
-    hasilIP[x] = tempmessage
-    #print key[a]
+def fungsi1(awal, tabel):
+    hasilIP = [None]*64
+    for x in range(0, len(tabel)):
+        a= tabel[x]-1
+        #print a
+        tempmessage = awal[a]
+        #print tempKey
+        hasilIP[x] = tempmessage
+    return hasilIP
+
 
 #print hasilIP
-
-leftM = hasilIP[:len(hasilIP)/2]
-rightM = hasilIP[len(hasilIP)/2:]
+resultIP = fungsi1(message, IP)
+leftM = resultIP[:len(resultIP)/2]
+rightM = resultIP[len(resultIP)/2:]
 
 #print leftM
 #print rightM
@@ -283,7 +285,7 @@ def ulangR(key, left, right):
     #print m
     #print n
     #print v
-    print Btot
+    #print Btot
 
     P = [16,   7,  20,  21]
     P.extend( [29,  12,  28,  17] )
@@ -359,8 +361,8 @@ right16 = ulangR(K16, left15, right15)
 final = left16
 final.extend(right16)
 
-print "L6R6 : ", final
-print len(final)
+print "L16R16 : ", final
+#print len(final)
 
 IPR = [
     40, 8,  48, 16, 56, 24, 64, 32,
@@ -382,6 +384,77 @@ for x in range(0, len(IPR)):
     finalIP[x] = tempf
     #print key[a]
 
-print "IP-1 : ", finalIP
-print len(finalIP)
+#print "IP-1 : ", finalIP
+#print len(finalIP)
 print bitlist_ke_str(finalIP)
+
+CC = fungsi1(finalIP, IP)
+#print CC
+
+RR0 = CC[:len(CC)/2]
+LL0 = CC[len(CC)/2:]
+
+LL1 = RR0
+RR1 = ulangR(K16, LL0, RR0)
+
+LL2 = RR1
+RR2 = ulangR(K15, LL1, RR1)
+
+LL3 = RR2
+RR3 = ulangR(K14, LL2, RR2)
+
+LL4 = RR3
+RR4 = ulangR(K13, LL3, RR3)
+
+LL5 = RR4
+RR5 = ulangR(K12, LL4, RR4)
+
+LL6 = RR5
+RR6 = ulangR(K11, LL5, RR5)
+
+LL7 = RR6
+RR7 = ulangR(K10, LL6, RR6)
+
+LL8 = RR7
+RR8 = ulangR(K9, LL7, RR7)
+
+LL9 = RR8
+RR9 = ulangR(K8, LL8, RR8)
+
+LL10 = RR9
+RR10 = ulangR(K7, LL9, RR9)
+
+LL11 = RR10
+RR11 = ulangR(K6, LL10, RR10)
+
+LL12 = RR11
+RR12 = ulangR(K5, LL11, RR11)
+
+LL13 = RR12
+RR13 = ulangR(K4, LL12, RR12)
+
+LL14 = RR13
+RR14 = ulangR(K3, LL13, RR13)
+
+LL15 = RR14
+RR15 = ulangR(K2, LL14, RR14)
+
+LL16 = RR15
+RR16 = ulangR(K1, LL15, RR15)
+
+#LL0, RR0 = R16, L16
+#print RR16
+#print leftM
+
+TTinv = RR16
+TTinv.extend(LL16)
+
+TT = fungsi1(TTinv, IPR)
+
+print message
+print TT
+
+
+
+
+
