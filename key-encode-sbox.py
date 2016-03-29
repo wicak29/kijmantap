@@ -28,7 +28,36 @@ def bitlist_ke_str(bl):
 IV = 'kudalari'
 ikey = '12345678'
 # mess = 'liar'
-mess = ['liar', 'suka', 'baru']
+mess_count = 0
+mess = []
+mess1 = 'dwi paling pro'
+start = 0
+end = 4
+
+#Fungsi memecah kata
+p_mess = len(mess1)
+index = p_mess
+
+while index > 0 :
+    p_mess = len(mess1)
+    if p_mess % 4 !=0:
+        if p_mess < 4 :
+            c_hur=0
+            while p_mess<4:
+                c_hur += 1
+                if p_mess+1 == 4:
+                    mess1 += str(c_hur)
+                else:
+                    mess1 += '0'
+                p_mess = len(mess1)
+    mess.append(mess1[start:end])
+    mess_count += 1
+    mess1 = mess1[end:]
+    # print mess1
+    # print mess[mess_count]
+    print mess
+    index -= 4
+    # print index
 
 for index in range(0, len(mess)):
     print "Iterasi ke-%d : " % index
@@ -424,7 +453,7 @@ for index in range(0, len(mess)):
     hasil0 = finalEncrypt
     print "DES result : ", hasil0
     dibagi0 = str_ke_bitlist(hasil0)
-    # print dibagi0
+    print "des bin : ", dibagi0
 
     Sleft0 = dibagi0[:len(dibagi0)/2]
     Sright0 = dibagi0[len(dibagi0)/2:]
