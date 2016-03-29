@@ -470,32 +470,8 @@ for index in range(0, len(mess)):
     IV = bitlist_ke_str(x1);
 
     print "x%d :" % index, x1
-    print "--------------------------------------------------------------------"
+    print "------------------------------------------------------------------------------------------------------------"
 
 print "Final CFB Result : ", IV
     # print len(x1)
     # print bitlist_ke_str(c1)
-
-
-# hasil0 = des(key).encrypt(IV)
-# print hasil0
-# dibagi0 = str_ke_bitlist(hasil0)
-# print dibagi0
-#
-# Sleft0 = dibagi0[:len(dibagi0)/2]
-# Sright0 = dibagi0[len(dibagi0)/2:]
-#
-# print Sleft0
-# #print Sright0
-#
-# m0 = str_ke_bitlist(mess)
-# print m0
-# c1 = map(lambda x, y: x^y, m0,Sleft0 )
-# print c1
-#
-# x1 = Sright0 + c1
-#
-# print x1
-#
-#
-# print bitlist_ke_str(c1)
