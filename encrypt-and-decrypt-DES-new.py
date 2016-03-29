@@ -523,25 +523,33 @@ for data in range(0,len(dataset),3):
         b_mess = str_ke_bitlist(mess[index])
         b_IV = str_ke_bitlist(IV)
 
-        hasilenkripsi = enkripsi(mess[index])
+        hasilenkripsi = enkripsi(IV)
+        #hasilenkripsi = enkripsi(mess[index])
         print "DES : ", hasilenkripsi
 
-        dibagi0 = str_ke_bitlist(hasilenkripsi)
-        print "DEs bin : ", dibagi0
+        DESbin = str_ke_bitlist(hasilenkripsi)
 
-        Sleft0 = dibagi0[:len(dibagi0) / 2]
-        Sright0 = dibagi0[len(dibagi0) / 2:]
+
+
+        #Sleft0 = dibagi0[:len(dibagi0) / 2]
+        #Sright0 = dibagi0[len(dibagi0) / 2:]
 
         # print Sleft0
         # print Sright0
 
         m0 = b_mess
-        print "Message : ", m0
-        c1 = map(lambda x, y: x ^ y, m0, dibagi0)
+
+        print "Message str : ", mess[index]
+        print "Message bin : ", m0
+        c1 = map(lambda x, y: x ^ y, m0, DESbin)
         # print c1
 
-        x1 = Sright0 + c1
-        IV = bitlist_ke_str(x1);
+        #x1 = Sright0 + c1
+        EncMess = bitlist_ke_str(c1)
 
-        print "x%d :" % index, x1
+        d1 = map(lambda x, y: x ^ y, c1, DESbin)
+        DecMess = bitlist_ke_str(d1)
+
+        print "x%d :" % index, EncMess
+        print "x%d :" % index, DecMess
         print "------------------------------------------------------------------------------------------------------------"
