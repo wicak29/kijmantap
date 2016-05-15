@@ -1,6 +1,7 @@
 __author__ = 'Indra Gunawan'
 
 from fractions import gcd
+import random
 
 #lol = gcd(7,20)
 #print lol
@@ -17,3 +18,7 @@ def coprime (y):
 
 coprime(20)
 print simpan
+
+#pilih coprime random
+e = random.choice(simpan)
+print e
