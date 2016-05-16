@@ -56,7 +56,7 @@ def coprime (EulerTotient, N):
           return MMI(index, EulerTotient), index
 
 minPrime = 0
-maxPrime = 1000
+maxPrime = 100
 
 #Generate P and Q value
 cached_primes = [i for i in range(minPrime,maxPrime) if isPrime(i)]
