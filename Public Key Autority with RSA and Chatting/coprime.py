@@ -16,7 +16,7 @@ def coprime (y):
             simpan.append(index)
             index=+1
 
-coprime(20)
+coprime(1200)
 print simpan
 
 #pilih coprime random
