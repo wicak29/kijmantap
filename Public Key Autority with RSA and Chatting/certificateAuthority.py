@@ -10,6 +10,8 @@ import collections
 from ladon.types.ladontype import LadonType
 import string
 import random
+import time
+import datetime
 
 
 #-------------------------------- RSA START ---------------------------------------------------------------------
@@ -165,8 +167,11 @@ class certificate(object):
 
         #print ofile
         #bagi = ofile.split('>')
-
-        waktu = "31-5-2016"
+        #waktu =time.time()+86400
+        #print waktu
+        #waktu1 = str(time.ctime(waktu))
+        #print waktu1
+        waktu = str(datetime.date.today() + datetime.timedelta(days=1))
         PUa = ofile
         #print ID
         #listkey = [random.choice(string.ascii_letters + string.digits) for n in xrange(8)]
@@ -178,32 +183,6 @@ class certificate(object):
         sertifikat = encMessage(msg, privateKeyD, N_Value)
         #print sertifikat
         sertifikatkirim = str(sertifikat)
-        #print sertifikatkirim
-        # idA = bagi[0]
-        # idB = bagi[1]
-        # Nance1 = bagi[2]
 
-        #print idA
-        #print idB
-        #print Nance1
-        #print bagi4
-
-        # listkey = [random.choice(string.ascii_letters + string.digits) for n in xrange(8)]
-        # randomsessionkey = "".join(listkey)
-        #
-        # kumpulB = randomsessionkey+"|"+idA
-        # paketB = enkripsi(key_B,kumpulB)
-        # kumpulA = randomsessionkey+">"+idA+">"+idB+">"+Nance1+"#"+paketB
-        # paketA = enkripsi(key_A,kumpulA)
-        # paketAA = str_ke_bitlist(paketA)
-        # paketAAA = str(paketAA)
-        #return paketA
-        # print kumpulB
-        # print paketB
-        # print kumpulA
-        # print paketA
-        #print paketAA
-        #print paketAAA
-        #print "request dikirim"
         return sertifikatkirim
 
