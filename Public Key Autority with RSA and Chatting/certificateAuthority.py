@@ -74,7 +74,7 @@ def encMessage(v_msg, v_e, v_n):
     for m in v_msg:
         #print "Huruf : ", m
         c = (m ** v_e) % v_n
-        print c
+        #print c
         encMsg.append(c)
     return encMsg
 
@@ -141,24 +141,26 @@ ID = ""
 # wow ="cuy"
 # lol = encMessage(wow, privateKeyD, N_Value)
 # print lol
+deskey =""
 class certificate(object):
 
     @ladonize(str, rtype=str)
     def requestawal(self, ifile):
-        global ID
+        global ID, deskey
         print "request diterima"
         bagi = ifile.split('>')
         #print ifile
         if bagi[0]=="first":
             publicAuth = str(publicKeyE)+'>'+str(N_Value)
             ID = bagi[1]
+            deskey = bagi[2]
             #print ID
             #print publicAuth
             return publicAuth
 
     @ladonize(str, rtype=str)
     def request(self, ofile):
-        global ID, privateKeyD, N_Value
+        global ID, privateKeyD, N_Value, deskey
         print "request diterima"
 
         #print ofile
@@ -167,15 +169,16 @@ class certificate(object):
         waktu = "31-5-2016"
         PUa = ofile
         #print ID
-
-        bungkus = waktu+'#'+ID+'#'+PUa
+        #listkey = [random.choice(string.ascii_letters + string.digits) for n in xrange(8)]
+        #deskey = "".join(listkey)
+        bungkus = waktu+'#'+ID+'#'+PUa+'#'+deskey
         print bungkus
         msg = [ord(c) for c in bungkus]
         #print "ASCII : ", msg
         sertifikat = encMessage(msg, privateKeyD, N_Value)
-        print sertifikat
+        #print sertifikat
         sertifikatkirim = str(sertifikat)
-        print sertifikatkirim
+        #print sertifikatkirim
         # idA = bagi[0]
         # idB = bagi[1]
         # Nance1 = bagi[2]
