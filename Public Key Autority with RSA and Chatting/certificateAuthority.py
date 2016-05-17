@@ -1,5 +1,5 @@
 __author__ = 'Indra Gunawan'
-__author__ = 'Indra Gunawan'
+
 #C:\Python27\python.exe C:\Python27\Scripts\ladon-2.7-ctl.py testserve certificateAuthority.py -p 8888
 from ladon.compat import PORTABLE_STRING
 
@@ -72,7 +72,7 @@ def coprime (EulerTotient, N):
 def encMessage(v_msg, v_e, v_n):
     encMsg = []
     for m in v_msg:
-        print "Huruf : ", m
+        #print "Huruf : ", m
         c = (m ** v_e) % v_n
         print c
         encMsg.append(c)
@@ -127,30 +127,55 @@ print "Public E : ", publicKeyE
 #idA = "alice"
 #idb = "bob"
 #Nance1 = "1"
-idA = ""
+idA = "alice"
 idB = ""
 Nance1 = ""
 key_B = "bobkey01"
 key_A = "alicekey"
+ID = ""
+#bungkus =""
+#sertifikat = encMessage(bungkus, privateKeyD, N_Value)
+
+# a = (12**200)%7
+# print a
+# wow ="cuy"
+# lol = encMessage(wow, privateKeyD, N_Value)
+# print lol
 class certificate(object):
 
     @ladonize(str, rtype=str)
     def requestawal(self, ifile):
+        global ID
         print "request diterima"
-
-        if ifile=="first":
+        bagi = ifile.split('>')
+        #print ifile
+        if bagi[0]=="first":
             publicAuth = str(publicKeyE)+'>'+str(N_Value)
-        # bagi = ofile.split('>')
-
-        return publicAuth
+            ID = bagi[1]
+            #print ID
+            #print publicAuth
+            return publicAuth
 
     @ladonize(str, rtype=str)
     def request(self, ofile):
+        global ID, privateKeyD, N_Value
         print "request diterima"
 
-        print ofile
-        # bagi = ofile.split('>')
-        #
+        #print ofile
+        #bagi = ofile.split('>')
+
+        waktu = "31-5-2016"
+        PUa = ofile
+        #print ID
+
+        bungkus = waktu+'#'+ID+'#'+PUa
+        print bungkus
+        msg = [ord(c) for c in bungkus]
+        #print "ASCII : ", msg
+        sertifikat = encMessage(msg, privateKeyD, N_Value)
+        print sertifikat
+        sertifikatkirim = str(sertifikat)
+        print sertifikatkirim
         # idA = bagi[0]
         # idB = bagi[1]
         # Nance1 = bagi[2]
@@ -177,5 +202,5 @@ class certificate(object):
         #print paketAA
         #print paketAAA
         #print "request dikirim"
-        return "hoi"
+        return sertifikatkirim
 
